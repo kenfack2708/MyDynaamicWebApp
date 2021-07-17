@@ -53,7 +53,7 @@ public class HelloServlet extends HttpServlet {
 		
 		PrintWriter writer = response.getWriter();
 		writer.println("<h1>Hi " + yourName + " dein Bonus lautet " + bonus +" Euro</h1>");
-		writer.println("Ende Stéphane112");
+		writer.println("Ende StÃ©phane10");
 		
 		writer.close();
 		// TODO Auto-generated method stub
