@@ -52,7 +52,7 @@ public class HelloServlet extends HttpServlet {
 		double bonus = Double.parseDouble(Gehalt)*bonuspercentage;
 		
 		PrintWriter writer = response.getWriter();
-		writer.println("<h1>Hi " + yourName + " dein Bonus lautet " + bonus +" Euro</h1>");
+		writer.println("<h1>Hi " + yourName + " dein Bonus beträgt " + bonus +" Euro</h1>");
 		writer.println("Sandrine");
 		
 		writer.close();
