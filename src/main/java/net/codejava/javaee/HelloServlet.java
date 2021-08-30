@@ -15,45 +15,49 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/helloServlet")
 public class HelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 102831973239L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public HelloServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
+    public double berechneBonusProzentsatz(String Firmenzugehoerigkeit) {
+    	
+         if (Double.parseDouble(Firmenzugehoerigkeit)<=3) {
+         	return 0.05;
+         }else if (Double.parseDouble(Firmenzugehoerigkeit)<=5){
+        	 return 0.1;        	
+         }else if (Double.parseDouble(Firmenzugehoerigkeit)<=8){
+        	 return 0.15;
+         }else if (Double.parseDouble(Firmenzugehoerigkeit)<=10){
+        	 return 0.20;
+         }else if (Double.parseDouble(Firmenzugehoerigkeit)<=15){
+        	 return 0.25;
+         }else if (Double.parseDouble(Firmenzugehoerigkeit)<=20){
+        	 return 0.30;
+         }else return 0.35;
+    }
+    
+    public double berechneBonus(String Firmenzugehoerigkeit, String AktuellesGehalt) {
+    	
+    	double bonus = Double.parseDouble(AktuellesGehalt)*berechneBonusProzentsatz(Firmenzugehoerigkeit);
+    	
+    	return bonus;
+   }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String yourName = request.getParameter("yourName");
-		String Jahr = request.getParameter("Jahr");
-		String Gehalt = request.getParameter("Gehalt");
-		
+		String NameMitarbeiter = request.getParameter("yourName");
+		String Firmenzugehoerigkeit = request.getParameter("Jahr");
+		String AktuellesGehalt = request.getParameter("Gehalt");
 		
 
-        double bonuspercentage ;
-        if (Double.parseDouble(Jahr)<=3) {
-        	bonuspercentage = 0.05;
-        }else if (Double.parseDouble(Jahr)<=5){
-        	bonuspercentage = 0.1;        	
-        }else if (Double.parseDouble(Jahr)<=8){
-        	bonuspercentage = 0.15;
-        }else if (Double.parseDouble(Jahr)<=10){
-        	bonuspercentage = 0.20;
-        }else if (Double.parseDouble(Jahr)<=15){
-        	bonuspercentage = 0.25;
-        }else if (Double.parseDouble(Jahr)<=20){
-        	bonuspercentage = 0.30;
-        }else bonuspercentage = 0.35;
-        
-		double bonus = Double.parseDouble(Gehalt)*bonuspercentage;
+		double bonus = berechneBonus(Firmenzugehoerigkeit,AktuellesGehalt);
 		
 		PrintWriter writer = response.getWriter();
-		writer.println("<h1>Hi " + yourName + " dein Bonus beträgt " + bonus +" Euro</h1>");
-		writer.println("Stephene");
+		writer.println("<h1>Hi " + NameMitarbeiter + " dein Bonus beträgt " + bonus +" Euro</h1>");
+		
 		
 		writer.close();
 		// TODO Auto-generated method stub
